@@ -1,7 +1,11 @@
+Special Mention: Did these tasks with Anish's
+
 #This command will set the path for all future task
 Set-Location "E:\IAC"
 #Task 1.1
 Get-Service | Export-Csv Services.CSV |Out-File services1.csv
+#Ans: Export-CSV will generate Services.csv with all services on a local pc. Out-File will generate blank file call services1.csv 
+#Because Out-file goes not get expected input. 
 #Task 1.2
 Get-Service | Export-Csv ServicesPipe.Csv -Delimiter "|"
 #Task 1.3
