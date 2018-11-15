@@ -1,0 +1,69 @@
+#This command will set the path for all future task
+Set-Location "E:\IAC"
+#Task 1.1
+Get-Service | Export-Csv Services.CSV |Out-File services1.csv
+#Task 1.2
+Get-Service | Export-Csv ServicesPipe.Csv -Delimiter "|"
+#Task 1.3
+Get-Service | Export-Csv ServicesNoTypeInformation.Csv -NoTypeInformation
+#Task 1.4
+Get-ADComputer -FILTER * | Get-HotFix
+#Command above will not work because Get-Hotfix expects 'ComputerName' in input, Rest all parameters do not support input from Pipe#
+#Task 1.5
+$Complist= Get-Content complist.csv
+Get-Service -ComputerName $Complist  |Format-Table -Property Machinename,Status,name,Displayname |out-file servicesfrmTxtFile.csv
+
+#Task 2.1
+
+for ($alphabet=0; $alphabet -lt 26; $alphabet++)
+    {
+        [char](65 + $alphabet)
+    }
+    
+#Task 2.2
+
+foreach ($svc in Get-Service)
+ {Write-Host The Display name of the Service $svc.Name is $svc.DisplayName}
+
+#Task 2.3
+
+$Users = Import-Csv -Delimiter "," -Path .\NewLocalUser.csv
+
+ Foreach ($user in $users)
+  {
+    $name =$user.name 
+    $Password =$user.password
+
+    New-LocalUser -name "$name" -Password (ConvertTo-SecureString $Password -AsPlainText -Force)
+   }
+   
+#Task 2.4
+
+$logfiles=Get-Item -path e:\IAC\*.log
+
+Foreach ($log in $logfiles)
+
+    {
+        Remove-Item $log
+                            }
+
+Get-Item -path e:\IAC\*.log
+
+#Task 2.5
+
+$num=Read-Host -prompt "Please enter First Number"
+$lnum=Read-Host -prompt "Please enter Last Number"
+
+For ($Num; $Num -le $lnum ; $Num++)
+    { if ($num % 2 -eq 0)
+    {"$num is Even"}
+       
+    Else 
+    {"$num is Odd"}
+
+    }
+
+
+
+
+
